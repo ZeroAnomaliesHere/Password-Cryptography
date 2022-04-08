@@ -1,0 +1,49 @@
+print("Welcome to Fulminare's Password Encryptor!\n")
+
+print("Please write a short word and then choose two")
+print("digits to put behind that word (ex. cat45).\n")
+print("Remember to alternate capitalizations!\n")
+
+before = input("Enter here: ")
+
+
+encrypt = before[:-2] # Gets the text that will be encrypted
+bumpNum = before[-2:] # Gets the last two digits so that the encryptor knows how far to bump the numbers up the ASCII chain
+
+
+def convert():
+    y = int(bumpNum)
+    d =  {
+      # Lowercase
+        'a': 'Alpha',  'b': 'Bravo',   'c': 'Charlie',
+        'd': 'Delta',  'e': 'Echo',    'f': 'Foxtrot',
+        'g': 'Golf',   'h': 'Hotel',   'i': 'India',
+        'j': 'Juliett','k': 'Kilo',    'l': 'Lima',
+        'm': 'Mike',   'n': 'November','o': 'Oscar',
+        'p': 'Papa',   'q': 'Quebec',  'r': 'Romeo',
+        's': 'Sierra', 't': 'Tango',   'u': 'Uniform',
+        'v': 'Victor', 'w': 'Whiskey', 'x': 'X-ray',
+        'y': 'Yankee', 'z': 'Zulu',
+
+      # Uppercase
+        'A': 'ALPHA',  'B': 'BRAVO',   'C': 'CHARLIE',
+        'D': 'DELTA',  'E': 'ECHO',    'F': 'FOXTROT',
+        'G': 'GOLF',   'H': 'HOTEL',   'I': 'INDIA',
+        'J': 'JULIETT','K': 'KILO',    'L': 'LIMA',
+        'M': 'MIKE',   'N': 'NOVEMBER','O': 'OSCAR',
+        'P': 'PAPA',   'Q': 'QUEBEC',  'R': 'ROMEO',
+        'S': 'SIERRA', 'T': 'TANGO',   'U': 'UNIFORM',
+        'V': 'VICTOR', 'W': 'WHISKEY', 'X': 'X-RAY',
+        'Y': 'YANKEE', 'Z': 'ZULU'} # Seperation of capitalization is ideal for more variety in the password
+
+    
+    nato = ''.join([d[x] for x in [*encrypt]]) # Converts everything into the NATO Phonetic Alphabet
+
+
+    for x in nato:
+      y = y - 1
+
+      print(''.join(chr(ord(x) + y))) # Converts everything to ASCII and then back to chr but shifts it over
+      
+
+convert()
