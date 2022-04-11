@@ -1,0 +1,1 @@
+The main idea for this program was for it to be somewhat easy to decode/encode by hand if need be, and to allow the storage of the shorter and unencrypted version of the password on paper. That way any peeping toms would see c11 instead of the actual password that would be Mqiyrni (The password can be made longer if wanted)
