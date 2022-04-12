@@ -1,3 +1,4 @@
+
 print("Welcome to Fulminare's Password Encryptor!\n")
 
 print("Please write a short word and then choose two")
@@ -35,15 +36,16 @@ def convert():
         'S': 'SIERRA', 'T': 'TANGO',   'U': 'UNIFORM',
         'V': 'VICTOR', 'W': 'WHISKEY', 'X': 'X-RAY',
         'Y': 'YANKEE', 'Z': 'ZULU'} # Seperation of capitalization is ideal for more variety in the password
-
-    
+  
     nato = ''.join([d[x] for x in [*encrypt]]) # Converts everything into the NATO Phonetic Alphabet
 
-
+    # Final part of translating letters and joining them
+    storChar = []
     for x in nato:
       y = y - 1
+      char = (chr(ord(x) + y)) # Converts to ASCII, adds y to aid in the difficulty of the encryption, and convert back to a character
+      storChar.append(char)
 
-      print(''.join(chr(ord(x) + y))) # Converts everything to ASCII and then back to chr but shifts it over
-      
-
+    print(''.join(storChar))
+  
 convert()
