@@ -1,4 +1,3 @@
-
 print("Welcome to Fulminare's Password Encryptor!\n")
 
 print("Please write a short word and then choose two")
@@ -43,9 +42,19 @@ def convert():
     storChar = []
     for x in nato:
       y = y - 1
-      char = (chr(ord(x) + y)) # Converts to ASCII, adds y to aid in the difficulty of the encryption, and convert back to a character
-      storChar.append(char)
-
-    print(''.join(storChar))
+      asc = ord(x) + y
+      
+      if 33 <= asc <= 126 or 161 <= asc <= 255:
+        char = (chr(asc))
+        storChar.append(char)
+        # Verifies asc is a printable character
+        
+      elif asc < 33 or 127 <= asc <= 160:
+        storChar.append(":[%s]:" % hex(asc))
+        # Checks if asc is not a printable character, and in this case will replace the ASCII interger with hexadecimal
+      else:
+        print("Something went wrong")
+        
+    print("Here is your password = %s" % ''.join(storChar)) # Finishes and pieces everything together
   
 convert()
