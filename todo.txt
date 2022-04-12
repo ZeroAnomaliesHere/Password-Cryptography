@@ -1,0 +1,6 @@
+- Make a verification, either check for two digits at the end, or ask if it looks correct when the unencryped pass is submitted
+- Create the decryptor as well
+- Figure out why the program doesn't encrypt full strings like caT45
+
+
+I need to iterate over each letter over the string and have it replace 
