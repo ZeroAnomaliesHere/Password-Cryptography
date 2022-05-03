@@ -1,0 +1,28 @@
+fullPass = input("\nWhat is the password that needs to be decrypted?\n")
+
+  # Split bumpNum from fullPass
+  decrypt = fullPass[:-2]
+  bumpNum = fullPass[-2:]
+  #y = int(bumpNum)
+
+  isColon = False
+  index = 0
+  storeNum = []
+  for x in range(index, len(decrypt)): # An error happens when I try to iterate through decrypt. May have to come back to this later (mOp)
+    asc = ord(decrypt[x])
+
+    # Looks for the syntax :[]:, if it's there then it will get the hex in between and convert it to ascii
+    if asc == 58: # 58 = :
+      isColon = True
+      
+    if asc == 91 and isColon == True:
+      verifyBrac = ord(decrypt[x + 4]) # 93 = ]
+      verifyColon = ord(decrypt[x + 5]) # 58 = :
+
+      if verifyBrac == 93 and verifyColon == 58:
+        for i in range(x + 1, x + 4): # Iterate between syntax
+          ascNum = decrypt[i] # Gets ASCII
+          storeNum.append(ascNum) 
+        
+        ascCode = ''.join(storeNum)
+        ascCode = ascCode.strip("]") # Sometimes the ASCII will be two digits, and it'll grab part of the syntax as well. This stops that
