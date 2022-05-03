@@ -50,8 +50,8 @@ def convert():
         # Verifies asc is a printable character
         
       elif asc < 33 or 127 <= asc <= 160:
-        storChar.append(":[%s]:" % hex(asc))
-        # Checks if asc is not a printable character, and in this case will replace the ASCII interger with hexadecimal
+        storChar.append(":[%s]:" % asc)
+        # Checks if asc is not a printable character, and in this case will fill that spot with the ASCII value between a syntax
       else:
         print("Something went wrong")
         
