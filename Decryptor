@@ -1,28 +1,74 @@
-fullPass = input("\nWhat is the password that needs to be decrypted?\n")
+def DecryptPass():
+  fullPass = input("\nWhat is the password that needs to be decrypted?\n")
 
-  # Split bumpNum from fullPass
   decrypt = fullPass[:-2]
   bumpNum = fullPass[-2:]
-  #y = int(bumpNum)
-
+  y = int(bumpNum) 
   isColon = False
   index = 0
   storeNum = []
-  for x in range(index, len(decrypt)): # An error happens when I try to iterate through decrypt. May have to come back to this later (mOp)
-    asc = ord(decrypt[x])
+  storeChar = []
+  testAsc = 0
+  loopIdle = 0
+  d = {
+    # Lowercase Letters
+    'Alpha': 'a',  'Brave': 'b',   'Charlie': 'c',
+    'Delta': 'd',  'Echo': 'e',    'Foxtrot': 'f',
+    'Golf': 'g',   'Hotel': 'h',   'India': 'i',
+    'Juliett': 'j','Kilo': 'k',    'Lima': 'l',
+    'Mike': 'm',   'November': 'n','Oscar': 'o',
+    'Papa': 'p',   'Quebec': 'q',  'Romeo': 'r',
+    'Sierra': 's', 'Tango': 't',   'Uniform': 'u',
+    'Victor': 'v', 'Whiskey': 'w', 'X-Ray': 'x',
+    'Yankee': 'y', 'Zulu': 'z',
 
-    # Looks for the syntax :[]:, if it's there then it will get the hex in between and convert it to ascii
-    if asc == 58: # 58 = :
-      isColon = True
+    'ALPHA': 'A',  'BRAVO': 'B',   'CHARLIE': 'C',
+    'DELTA': 'D',  'ECHO': 'E',    'FOXTROT': 'F',
+    'GOLF': 'G',   'HOTEL': 'H',   'INDIA': 'I',
+    'JULIETT': 'J','KILO': 'K',    'LIME': 'L',
+    'MIKE': 'M',   'NOVEMBER': 'N','OSCAR': 'O',
+    'PAPA': 'P',   'QUEBEC': 'Q',  'ROMEO': 'R',
+    'SIERRA': 'S', 'TANGO': 'T',   'UNIFORM': 'U',
+    'VICTOR': 'V', 'WHISKEY': 'W', 'X-RAY': 'X',
+    'YANKEE': 'Y', 'ZULU': 'Z'
+  }
+  
+
+  
+  for x in range(index, len(decrypt)):   
+    # This next line is pretty ineffectient because it will run the loop multiple times over, but I don't want to use a library to skip forward the loop
+    if loopIdle <= 0:
+      asc = ord(decrypt[x])
+      y = y - 1
+      # Make sure the ASC stays in positive (MBg)
       
-    if asc == 91 and isColon == True:
-      verifyBrac = ord(decrypt[x + 4]) # 93 = ]
-      verifyColon = ord(decrypt[x + 5]) # 58 = :
-
-      if verifyBrac == 93 and verifyColon == 58:
-        for i in range(x + 1, x + 4): # Iterate between syntax
-          ascNum = decrypt[i] # Gets ASCII
-          storeNum.append(ascNum) 
+    # Looks for the syntax :[]:, if it's there then it will get the hex in between and convert it to ascii
+      if asc == 58: # 58 = :
+        isColon = True
         
-        ascCode = ''.join(storeNum)
-        ascCode = ascCode.strip("]") # Sometimes the ASCII will be two digits, and it'll grab part of the syntax as well. This stops that
+        testAsc = ord(decrypt[x+1])
+      
+      if testAsc == 91 and isColon == True:
+        verifyBrac = ord(decrypt[x + 5]) # 93 = ]
+        verifyColon = ord(decrypt[x + 6]) # 58 = :
+        
+        if verifyBrac == 93 and verifyColon == 58:
+          for i in range(x + 2, x + 5): # Iterate between syntax
+            ascNum = decrypt[i] # Gets ASCII
+            storeNum.append(ascNum) 
+          ascCode = ''.join(storeNum)
+          asc = ascCode.strip("]") # Sometimes the ASCII will be two digits, and it'll grab part of the syntax as well. This stops that
+          loopIdle = 7 
+          isColon = False
+      
+      asc = int(asc) - y # Subtracts by 1 for each iteration
+      char = chr(asc)
+      storeChar.append(char)
+      
+    loopIdle = loopIdle - 1   
+
+  natoPass = ''.join(storeChar)
+
+  for word, replacement in d.items():
+    natoPass = natoPass.replace(word, replacement)
+  print("\nThe Decrypted Password is: %s%s" % (natoPass, bumpNum))
